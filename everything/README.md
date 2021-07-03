@@ -17,3 +17,5 @@ deskpins程序
 	Import-Module PSReadLine
 	# Enable Prediction History
 	Set-PSReadLineOption -PredictionSource History
+
+#### git
