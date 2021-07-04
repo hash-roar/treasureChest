@@ -19,3 +19,4 @@ deskpins程序
 	Set-PSReadLineOption -PredictionSource History
 
 #### git
+add nothing
