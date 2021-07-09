@@ -51,6 +51,49 @@ nginx -g：附加配置文件路径
 3.启动NGINX服务
 
 	D:\Programs\nginx-1.14.2>start nginx
+3.1 使用start启动nginx
+powershell中使用start-process可以新开一个进程且不会阻塞命令行
+	
+	start-process语法:
+	Start-Process   
+	[-FilePath] <string>   
+	[[-ArgumentList] <string[]>]   
+	[-Credential <pscredential>]   
+	[-WorkingDirectory <string>]   
+	[-LoadUserProfile]   
+	[-NoNewWindow]   
+	[-PassThru]   
+	[-RedirectStandardError <string>]   
+	[-RedirectStandardInput <string>]   
+	[-RedirectStandardOutput <string>]   
+	[-WindowStyle {Normal | Hidden | Minimized | Maximized}]   
+	[-Wait]  
+	[-UseNewEnvironment]    
+	[<CommonParameters>]
+	-FilePath - 此参数用于指定在进程中运行的程序的文件名。输入与计算机上的程序相关联的文档文件或可执行文件的名称。
+	-ArgumentList - 参数指定cmdlet开始进程时要使用的参数及其值。
+	-Credential - 参数用于授予用户帐户执行该过程的权限。
+	-WorkingDirectory - 此参数用于指定在进程中执行的文件的位置。
+	-LoadUserProfile - 此cmdlet中使用此参数来加载Windows的用户配置文件，该配置文件存储在当前用户的HKEY_USERS注册表项中。
+	-NoNewWindow - 此参数在当前窗口的控制台中启动新进程。默认情况下，PowerShell打开一个用于执行新进程的新窗口。
+	-PassThru - 此参数返回由cmdlet启动的每个进程的对象。
+	-RedirectStandardError - 此参数将由进程创建的错误发送到指定的文件。使用此cmdlet时，需要输入文件的路径和名称。默认情况下，进程错误将显示在控制台上。
+	-RedirectStandardInput - 在命令中使用此参数时，进程可以从指定文件读取输入。要使用此参数，需要输入文件的路径和名称。默认情况下，进程从键盘读取输入。
+	-RedirectStandardOutput - 此参数将由进程创建的输出发送到指定的文件。 使用此cmdlet时，需要输入文件的路径和名称。 默认情况下，进程的输出显示在控制台上。
+	-WindowStyle - 此参数用于指定Windows状态，该状态用于新进程。以下是此参数可接受的值：
+	
+	HiddenNormal (默认值)MaximizedMinimized
+	
+	注意：不能在同一命令中同时使用参数NoNewWindow和WindowStyle。
+	
+	-Wait - 此cmdlet中使用此参数来等待过程完成，然后再接受更多输入。
+
+	例如
+	
+	改变配置文件
+	start nginx -ArgumentList  "-c .\conf\nginx.conf "
+	注意要用引号括起来防止参数解析错误
+
 4.重载NGINX服务
 
 	D:\Programs\nginx-1.14.2>nginx -s reload
@@ -250,55 +293,3 @@ nginx -g：附加配置文件路径
 	cd "%NGINX_DIR%"  
 	del logs\error.log
 	goto :eof
-
-### 配置结构
-
-	# 这里是一些配置
-	...
-	http {
-	  # 这里是一些配置
-	  ...
-	  # 这部分可能存在于/etc/nginx/conf.d/目录下
-	  upstream {
-	
-	  }
-	  server {
-	    listen 8080;
-	    root /data/up1;
-	
-	    location / {
-	    }
-	  }
-	  server {
-	    listen 80;
-	    root /data/up2;
-	
-	    location / {
-	    }
-	  }
-	  这里是一些配置
-	  ...
-	}
-	
-	mail {
-	}
-
-
-### nginx搭建文件服务器
-修改conf文件
-
-	server {
-	  listen 80; 
-	  server_name myServerNamne; # 自己PC的ip或者服务器的域名
-	  charset utf-8; # 避免中文乱码 
-	  root /www/static; # 存放文件的目录 
-	  location / { 
-	    autoindex on; # 索引 
-	    autoindex_exact_size on; # 显示文件大小 
-	    autoindex_localtime on; # 显示文件时间 
-	  }
-	}
-
-### 多个webapp配置
-
-
