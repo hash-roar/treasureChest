@@ -2,9 +2,47 @@
 本人喜欢在powershell上折腾,因此在windows测试使用nginx
 
 ### windows下nginx命令
+0.总览
+
+	Options:
+	  -?,-h         : this help
+	  -v            : show version and exit
+	  -V            : show version and configure options then exit
+	  -t            : test configuration and exit
+	  -T            : test configuration, dump it and exit
+	  -q            : suppress non-error messages during configuration testing     
+	  -s signal     : send signal to a master process: stop, quit, reopen, reload  
+	  -p prefix     : set prefix path (default: NONE)
+	  -c filename   : set configuration file (default: conf/nginx.conf)
+	  -g directives : set global directives out of configuration file
+
+nginx -h：查看帮助
+
+nginx -v：查看nginx的版本
+
+nginx -V：查看版本和nginx的配置选项
+
+nginx -t：测试配置文件的正确性
+
+Nginx -T: 测试配置文件，并显示配置文件（这个命令可以快速查看配置文件）
+
+nginx -q：测试配置文件，但是只显示错误信息
+
+nginx -s：发送信号，下面详细介绍
+
+nginx -p：设置前缀
+
+nginx -c：设置配置文件
+
+nginx -g：附加配置文件路径
+
 1.检查配置文件是否有效
 	
 	D:\Programs\nginx-1.14.2>nginx -t -c conf/nginx.conf
+
+1.1设置配置文件
+
+	nginx -c
 
 2.查看版本
 
