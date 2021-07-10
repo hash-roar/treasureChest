@@ -94,7 +94,39 @@ access_log /data/logs/nginx/b.ttlsa.com-access.log main：访问日志
 	root /uri/errorpages/}
 	就能自动匹配
 	
-### 多个webapp配置
+### nginx+php环境
 
+nginx与php交互使用fastcgi协议,但是windows下php-cgi.exe有以下缺点
 
+1. 配置文件 php.ini 修改后无法平滑重载，需要重新启动 php-cgi 进程；
+2. Windows 下 php-cgi 默认处理 500 个请求后就自动退出（PHP_FCGI_MAX_REQUESTS）；
+3. 如果因为其他原因造成 php-cgi 进程崩溃，就无法处理后续请求了
+
+linux 下用php-fpm这个PHP FastCGI管理器,提供了更好的PHP进程管理方式，可以有效控制内存和进程、可以平滑重载PHP配置.但是在windows下只能用一用spawn-CGI进程管理器..
+
+将php-cgi-spawner.exe下载到php.exe同级目录,ps中运行
+
+	.\php-cgi-spawner.exe "php-cgi.exe -c php.ini" 9000 4+16
+	# 令 PHP FastCGI 处理程序监听在 9000 端口上
+	# 至少开启 4 个 php-cgi 进程，高负载时最多可以开到 16 个
+
+配置location块:
+
+	location ~ [^/]\.php(/|$) {
+	        # 从 URI 中分离出 $fastcgi_script_name 和 $fastcgi_path_info 的值
+	        # 不推荐使用 php.ini 中的 cgi.fix_pathinfo 选项，这可能会造成安全隐患
+	        fastcgi_split_path_info  ^(.+?\.php)(/.*)$;
+	        fastcgi_param  PATH_INFO  $fastcgi_path_info;
+	
+	        # 当请求的 .php 文件不存在时直接返回 404
+	        # 不然交给 PHP 处理的话那边就会返回 No input file specified.
+	        if (!-f $document_root$fastcgi_script_name) {
+	            return 404;
+	        }
+	
+	        fastcgi_pass   127.0.0.1:9000;
+	        fastcgi_index  index.php;
+	        # 自带的配置文件，里面设置了一大堆 CGI 协议中的变量
+	        include        fastcgi.conf;
+	    }
 
