@@ -1,5 +1,8 @@
 # nginx配置
 
+### [nginx可视化配置](https://www.nginxwebui.cn/news.html)
+### [关于nginx中$fastcgi_script_name与$request_name区别](https://qastack.cn/server/465607/nginx-document-rootfastcgi-script-name-vs-request-filename)
+
 ### 配置结构
 
 	# 这里是一些配置
@@ -129,4 +132,26 @@ linux 下用php-fpm这个PHP FastCGI管理器,提供了更好的PHP进程管理�
 	        # 自带的配置文件，里面设置了一大堆 CGI 协议中的变量
 	        include        fastcgi.conf;
 	    }
+
+### nginx+thinkphp5配置
+通过重写uri实现
+
+	nginx 的rewrite规则
+	1 任何重写规则的第一部分都是一个正则表达式
+	可以使用括号来捕获，后续可以根据位置来将其引用，位置变量值取决于捕获正则表达式中的顺序，$1 引用第一
+	个括号中的值，$2 引用第二个括号中的值，以此类推。如：
+	
+	^/images/([a-z]{2})/([a-z0-9]{5})/(.*)\.(png|jpg|gif)$
+	
+	$1 是两个小写字母组成的字符串，$2 是由小写字母和 0 到 9 的数字组成的 5 个字符的字符串，$3 将是个文件名，
+	$4 是 png、jpg、gif 中的其中一个。
+	
+	2 重写规则的第二部分是 URI
+	请求被改写。该 URI 可能包含正则表达式中的捕获的位置参数或这个级别下的 nginx 任何配置变量。如：
+	/data?file=$3.$4
+	如果这个 URI 不匹配 nginx 配置的任何 location，那么将给客户端返回 301(永久重定向)或 302(临时重定向)的状
+	态码来表示重定向类型。该状态码可以通过第三个参数来明确指定。
+	3 重写规则的第三部分
+	第三部分也就是尾部的标记(flag)。 last 标记将导致重写后的 URI 搜索匹配 nginx 的其他 location，最多可循
+	环 10 次
 
