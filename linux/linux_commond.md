@@ -91,5 +91,32 @@
 		         
 ### 	crontab 周期启动
 
+### curl 
+	curl -silent 不显示进度条
+	-O 写入文件   -o 写入指定文件
+	-- progress 进度条
+	- I 打印头信息
+	$ curl -d 'login=emma' -d 'password=123' -X POST  https://wangchujiang.com/login
+	post请求
+	curl -d '@data.txt' https://wangchujiang.com/upload
+	# 读取data.txt文件的内容，作为数据体向服务器发送。
+	
+### wget
 
-		   
+	wget -O 指定下载文件  -c 断点续传
+	--spider 测试下载链接
+	-i 下载多个文件
+
+### ip 查看网络信息
+### hostname
+### firewalld
+### nc 端口扫描
+### netstat
+
+	netstat -l 监听的端口 -a所有端口
+	-p 显示程序
+
+### df查看磁盘使用
+### 
+	
+		 
