@@ -1,4 +1,4 @@
-
+#### php  数组函数
 array_change_key_case — 返回字符串键名全为小写或大写的数组
 
 array_chunk — 将一个数组分割成多个
@@ -148,3 +148,6 @@ uasort — 使用用户自定义的比较函数对数组中的值进行排序并
 uksort — 使用用户自定义的比较函数对数组中的键名进行排序
 
 usort — 使用用户自定义的比较函数对数组中的值进行排序
+
+#### php解析json
+传过来的stringfy的json可以由json_decode解析成stdclass的object类型,强制类型转换(array)可以转换成数组.
