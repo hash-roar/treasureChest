@@ -10,3 +10,6 @@
 
 ## vue项目结构
 ![vue项目结构.png](http://ww1.sinaimg.cn/large/007b6ma2ly1gstap8pfq5j30tb0qq7mw.jpg)
+
+### vuex目录结构
+![vuex目录结构.png](http://ww1.sinaimg.cn/large/007b6ma2ly1gstbqbq16mj31490jagqt.jpg)
