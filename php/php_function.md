@@ -151,3 +151,21 @@ usort — 使用用户自定义的比较函数对数组中的值进行排序
 
 #### php解析json
 传过来的stringfy的json可以由json_decode解析成stdclass的object类型,强制类型转换(array)可以转换成数组.
+
+#### php 文件操作,将数组或对象写入文件
+[file_resolve](https://www.jianshu.com/p/e845ab9e85c6)
+使用 serialize 将数组序列化，存储在文件中；调用时，再使用 unserialize 还原。
+
+	<?php 
+	$file='./cache/phone.php'; 
+	$array=array('color'=  array('blue','red','green'),'size'=  array	('small','medium','large')); 
+	//缓存 
+	if(false!==fopen($file,'w+')){ 
+ 	file_put_contents($file,serialize($array));//写入缓存 
+	} 
+	//读出缓存 
+	$handle=fopen($file,'r'); 
+	$cacheArray=unserialize(fread($handle,filesize($file))); 
+
+
+	

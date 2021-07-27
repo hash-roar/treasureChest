@@ -13,3 +13,25 @@
 
 ### vuex目录结构
 ![vuex目录结构.png](http://ww1.sinaimg.cn/large/007b6ma2ly1gstbqbq16mj31490jagqt.jpg)
+
+#### vuex页面刷新丢失数据解决
+
+	created() {
+	    if (sessionStorage.getItem("store")) {
+	      this.$store.replaceState(
+	        Object.assign(
+	          {},
+	          this.$store.state,
+	          JSON.parse(sessionStorage.getItem("store"))
+	        )
+	      );
+	    }
+	
+	    //在页面刷新时将vuex里的信息保存到sessionStorage里
+	    window.addEventListener("beforeunload", () => {
+	      sessionStorage.setItem("store", JSON.stringify(this.$store.state));
+	    });
+	  },
+
+### vue 插槽
+[插槽及vuetify插槽使用](https://blog.51cto.com/zhuxianzhong/2548252)
