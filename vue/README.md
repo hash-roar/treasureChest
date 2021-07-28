@@ -1,4 +1,13 @@
 # vue
+##  项目
+技术栈: html5+css+es6+vue(vue,vuex,router,aoixs))+vuetify+php
++mysql+nginx+thinkphp
+
+###已完成
+1.数据库后台管理
+![数据库管理.png](http://ww1.sinaimg.cn/large/007b6ma2ly1gswpuf2vikj31ya0zvkcj.jpg)
+2登录页面
+![Login.png](http://ww1.sinaimg.cn/large/007b6ma2ly1gswpyhga3kj30kv0y00u6.jpg)
 
 ## bugs
 
@@ -33,5 +42,6 @@
 	    });
 	  },
 
-### vue 插槽
-[插槽及vuetify插槽使用](https://blog.51cto.com/zhuxianzhong/2548252)
+### vue工程实践
+
+[vue工程目录](https://learnku.com/articles/21099)
