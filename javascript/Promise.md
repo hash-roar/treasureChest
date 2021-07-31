@@ -3,4 +3,10 @@
 
 [promise原理](https://developer.mozilla.org/zh-CN/docs/orphaned/Web/JavaScript/Reference/Global_Objects/Promise)
 
+### promise原理代码实现
+
+		
+
+ 	
+
 
