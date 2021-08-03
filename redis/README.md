@@ -97,10 +97,34 @@ key => (field=>value)
 
 底层实现hash 关联value 和score
 跳跃表 快速找到元素
+### bitmaps
 
+	setbit key offset value
+	getbit key offset
+	bitcount key 统计1操作
+	bitop 与或非操作
+	
+### hyperloglog
+
+	pfadd
+
+### geo
+地理信息
+
+	geoadd key longtitude 
 ## redis配置
 
-
+	daemonize no       Redis 默认不是以守护进程的方式运行，可以通过该配置项修改，使用 yes 启用守护进程（Windows 不支持守护线程的配置为 no ）
+	pidfile /var/run/redis.pid         当 Redis 以守护进程方式运行时，Redis 默认会把 pid 写入 /var/run/redis.pid 文件，可以通过 pidfile 指定
+	loglevel notice
+	 maxclients 128      设置同一时间最大客户端连接数，默认无限制，Redis 可以同时打开的客户端连接数为 Redis 进程可以打开的最大文件描述符数，如果设置 maxclients 0，表示不作限制。
+	 当客户端连接数到达限制时，Redis 会关闭新的连接并向客户端返回 max number of clients reached 错误信息
+	 include /path/to/local.conf    指定包含其它的配置文件，可以在同一主机上多个Redis实例之间使用同一份配置文件，而同时各个实例又拥有自己的特定配置文件
+	 
 	
+## 发布订阅
+一种通信模式
 
-	
+
+## redis验证码
+
