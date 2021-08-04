@@ -204,4 +204,7 @@ pthread_cond_t 保存了阻塞的线程id
 	    pthread_cond_destroy(&cond);
 	    return 0;
 	}
+
+### 信号量
+
 	
