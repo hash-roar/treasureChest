@@ -147,7 +147,107 @@ this作用域是在类内部，当在类的非静态成员函数中访问类的�
  	后置 
  	classname & operator++(int)
  	{ return *this}
-	占位参数区分前后置.
+	占位参数区分前后置. 
  	
  	
+ ### 继承
  
+ 	class name : public parentClass
+ 	公共继承,
+ 	保护继承,到子类全部为保护及私有
+ 	私有继承,全部私有
+ 	父类中所有非静态成员都会被继承
+ 
+ #### 构造与析构
+ 
+ 	父类构造->子类构造->子类析构->父类构造
+ 
+ #### 同名函数
+ 
+ 	classname.parentname::name    访问父类成员属性
+ 	子类会隐藏父类同名成员函数
+ 	静态:
+ 	classname:parentname:name
+ 	
+ #### 多继承
+ 
+ 	利用虚继承解决菱形继承问题
+ 	calssname : virtual classname
+ 	
+ ### 多态
+ 派生类.虚函数
+ 
+ 	virtual void func(){}虚函数,地址晚绑定
+ 	继承,子类重写父类虚函数
+ 	使用:类指针或者引用执行子类对象
+ 	原理:父类中存在一个虚函数(表)指针
+ 	虚函数表:记录虚函数地址
+ 	子类重写父类虚函数;
+ 	子类虚函数表内部会被替换成子类虚函数表
+ 
+ #### 纯虚函数和抽象类
+ 
+ 	抽象类:无法实例化,子类必须重写虚函数否则还是抽象类
+ 	纯虚函数:irtual void func()= 0;
+ 
+ #### 虚构和纯虚析构
+ 
+ 	解决父类释放子类资源
+ 	~virtual classname();
+ 	纯虚析构: virtual ~calaname()= 0 ;
+ 
+ 
+ ###文件操作
+
+	头文件<fstream>
+	 fd.open("1.txt",ios::in);
+	    if(!fd.is_open())
+	    {
+	        cout<<"文件打开失败"<<endl;
+	        return 0 ;
+	    }
+	    char buffer[1024] = {0};
+	    while (fd>>buffer)
+	    {
+	        cout<<buffer<<endl;
+	    }
+	   2:
+	    while (fd.getline(buffer,sizeof(buffer)))
+	    {
+	        cout<<buffer<<endl;
+	    }
+	    3:
+	     string buffer;
+	    while (getline(fd,buffer))
+	    {
+	        cout<<buffer<<endl;
+	    }
+	    二进制写入:
+	    fd.write(const char * p,length)
+	    读:
+	    fd.read(char * buffer,length)
+
+### 泛型 模板
+#### 函数模板
+
+	Templete<typename T>
+	func()
+	显示指定类型
+	func<int>();
+	自动推导必须推出一致的数据类型
+	推出数据类型才能使用函数
+	普通函数会发生隐式类型转化
+	函数模板用显示指定参数类型会发生类型转换
+
+#### 普通函数与模板函数同名
+
+	优先调用普通函数
+	可用空模板强制调用函数模板
+	函数模板可以重载
+	函数模板有更好的匹配,优先函数模板
+	模板特殊重载
+	templete<> bool func(int a,int b
+	
+####类模板
+
+	
