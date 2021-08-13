@@ -249,5 +249,162 @@ this作用域是在类内部，当在类的非静态成员函数中访问类的�
 	templete<> bool func(int a,int b
 	
 ####类模板
+建立一个通用的类
 
+	templete <class name>
+
+#### 类模板与函数模板
+
+	类模板没有自动类型推导
+	类模板可以自定义默认参数
+
+#### 类模板成员函数
+在调用时创建
+
+#### 类模板对象做参数
+
+	指定传入类型 void function(Classname<> &p>
+	templete<>
+	参数模板化    void void func(clasnname<>
 	
+
+#### 类模板与继承
+
+	class name :public name<int>
+	
+#### 类模板函数类外实现
+
+	templete<classs t>
+	classname<t>func(t a)
+
+#### 类模板与友元
+
+
+### stl
+
+#### vector
+
+	构造函数
+	vector<>v(begin,end)
+	vector<>v(n,elemern)
+	vector<>v(&v2)
+	赋值
+	v1=v2
+	assign(begin,end)
+	assign(n,element)
+	容量和大小
+	empty
+	capacity
+	size
+	resize
+	插入删除
+	push_back
+	pop_back
+	insert
+	erase
+	clear
+	存取
+	at
+	[]
+	front
+	back
+	互换容器
+	vector<>v.wap(v)收缩内存
+	预留空间
+	reserve()防止重复动态扩展
+
+#### deque
+
+	#include<deque>
+	赋值
+	= 
+	assign
+	大小操作
+	empty
+	size
+	resize
+	插入删除
+	insert()
+	clear
+	erase
+	取值
+	at
+	[]
+	排序
+	#include<algorismn>
+	sort
+	sort()
+
+#### stack
+
+	构造
+	默认构造与拷贝构造
+	top
+	pop
+
+#### queue
+
+#### list
+
+	构造
+	和vector一样
+	赋值
+	=
+	assign
+	swap
+	大小操作
+	size
+	empty
+	resize(默认填充0
+	删除
+	erase
+	数据存取
+	没有随机访问
+	反转和排序,内部提供
+	reverse()
+
+#### set
+
+	自动排序
+	不允许重复的值
+	empty
+	swamp
+	插入删除'
+	insert
+	clear
+	erase
+	查找
+	find:返回迭代器,没找到返回end()
+	自定义数据类型排序
+	定义仿函数
+	set<name,classname>
+	classname{
+	public:   bool operator()(const name &a,const name &b)
+	{ return }
+#### pair
+
+	pair<>p= make_pair();
+	p.fisrt  p.second
+	
+
+#### 	mutiset
+
+	可以有重复值
+
+#### map
+
+	插入
+	insert(pair<>())
+	insert(make_pair())
+	map[key] = value
+	查找和统计
+	find(key) 返回迭代器
+
+### 函数对象
+重载了函数调用操作符的类
+函数对象可以作为参数传递
+
+### 谓词
+返回bool类型的仿函数叫谓词
+
+

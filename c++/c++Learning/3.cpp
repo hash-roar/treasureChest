@@ -40,8 +40,6 @@ Person::~Person()
 
 int main()
 {
-    Person p(10);
-    Person p2 = p;
-    cout << p2.getA()<<endl;
+    
     return 0;
 }
