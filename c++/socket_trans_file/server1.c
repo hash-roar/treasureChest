@@ -9,12 +9,6 @@ int main(int argc, char *arg[])
 {
     char *file_path = arg[1];
     // try open files
-    FILE *fp = fopen(file_path, "wb");
-    if (fp == NULL)
-    {
-        perror("fopen");
-        return -1;
-    }
     int fd = socket(AF_INET, SOCK_STREAM, 0); //使用ipv4,流式传输协议,使用默认协议
     if (fd == -1)
     {
@@ -51,6 +45,16 @@ int main(int argc, char *arg[])
     }
     //定义ip
     char ip[32];
+    //接受文件名
+    char file_name[50];
+    read(cfd, file_name, sizeof(file_name));
+    //打开文件
+    FILE *fp = fopen(file_name, "wb");
+    if (fp == NULL)
+    {
+        perror("fopen");
+        return -1;
+    }
     //打印连接客户端信息inet_ntop将ip地址转化为小端,
     printf("客户端ip:%s,客户端端口:%d\n", inet_ntop(AF_INET, &caddr.sin_addr.s_addr, ip, sizeof(ip)), ntohs(caddr.sin_port));
     while (1)
@@ -60,7 +64,7 @@ int main(int argc, char *arg[])
         int len = read(cfd, buffer, sizeof(buffer));
         if (len > 0)
         {
-            printf("客户端说发送%dB数据", len);
+            printf("客户端说送%dB数据", len);
             fwrite(buffer, len, 1, fp);
             memset(buffer, 0, sizeof(buffer));
             sprintf(buffer, "服务端收到%dB数据", len);

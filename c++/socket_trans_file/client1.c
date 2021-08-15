@@ -11,7 +11,16 @@ int main(int argc, char *arg[])
     printf("传入%d参数\n", argc);
     char *self_path = arg[0];
     char *file_path = arg[1];
-    printf("file_path:%s", file_path);
+    char *file_name;
+    printf("file_path:%s\n", file_path);
+    if (strrchr(file_path, '/') == NULL)
+    {
+        file_name = file_path;
+    }
+    else
+    {
+        file_name = strrchr(file_path, '/') + 1;
+    }
 
     //创建通信套接字
     int fd = socket(AF_INET, SOCK_STREAM, 0);
@@ -34,6 +43,8 @@ int main(int argc, char *arg[])
         return -1;
     }
     int message_index = 0;
+    //传输文件名
+    write(fd, file_name,strlen(file_name)+1);
     //打开文件
     FILE *fp;
     //以二进制形式读写文件
