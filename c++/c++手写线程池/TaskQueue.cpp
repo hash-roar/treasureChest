@@ -128,6 +128,8 @@ void *ThreadPool<T>::worker(void *arg)
         //任务队列里没有任务时,阻塞线程
         while (pool->taskQue->taskNUM() == 0 && !pool->shutdown)
         {
+            //拿到锁的线程在此阻塞,并且在函数内部将锁释放,因此更多的线程将在此阻塞
+            //线程解除阻塞后判断是否是线程退出,否则进入下一个循环获取队列任务
             pthread_cond_wait(&pool->notEmpty, &pool->mutexPool);
 
             if (pool->exitNum > 0)
