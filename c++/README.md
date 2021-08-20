@@ -407,4 +407,47 @@ this作用域是在类内部，当在类的非静态成员函数中访问类的�
 ### 谓词
 返回bool类型的仿函数叫谓词
 
+## void*
 
+### 释放void*内存
+
+在C、C++ 中，void * 指针可以转换为任意类型的指针类型，在删除void*指针时编译器往往会发出如下警告
+
+warning: deleting ‘void*’ is undefined [enabled by default]
+
+翻译：警告：删除“void *”指针可能引发未知情况（默认打开警告）
+
+删除void *指针可能引起严重的bug而且难以发现：
+
+使用delete pointer; 释放void指针void ，系统会以释放普通指针（char, short, int, long, long long）的方式来释放void 指向的内存空间；
+
+如果void *指向一个数组指针，那么由于释放指针时用了delete pointer从而导致内存泄漏，释放指针正确做法是delete[] pointer;
+
+如果void 指向一个class类，那么系统由于认为void 指向一个普通的内存空间，所以释放指针时系统class的析构函数不会调用；
+
+将void 转换为原来类型的指针，然后再调用delete释放指针，如果原来的指针是数组指针，那么必须使用delete []删除指向的内存空间。
+
+	template <typename T>  
+	inline void safe_delete_void_ptr(void *&target) {  
+	    if (nullptr != target) {  
+	        T* temp = static_cast<T*>(target);  
+	        delete temp;  
+	        temp = nullptr;  
+	        target = nullptr;  
+	    }  
+	}  
+	
+	//调用方法
+	
+	int *psample = new int(100);  
+	safe_delete_void_ptr<int>(psample); 
+
+### 避免包含重定义
+
+  #ifndef的方式受C/C++语言标准支持。它不光可以保证同一个文件不会被包含多次，也能保证内容完全相同的两个文件（或者代码片段）不会被不小心同时包含。
+    当然，缺点就是如果不同头文件中的宏名不小心“撞车”，可能就会导致你看到头文件明明存在，编译器却硬说找不到声明的状况——这种情况有时非常让人抓狂。
+    由于编译器每次都需要打开头文件才能判定是否有重复定义，因此在编译大型项目时，ifndef会使得编译时间相对较长，因此一些编译器逐渐开始支持#pragma once的方式。
+
+    #pragma once一般由编译器提供保证：同一个文件不会被包含多次。注意这里所说的“同一个文件”是指物理上的一个文件，而不是指内容相同的两个文件。你无法对一个头文件中的一段代码作pragma once声明，而只能针对文件。
+    其好处是，你不必再费劲想个宏名了，当然也就不会出现宏名碰撞引发的奇怪问题。大型项目的编译速度也因此提高了一些。
+    对应的缺点就是如果某个头文件有多份拷贝，本方法不能保证他们不被重复包含。当然，相比宏名碰撞引发的“找不到声明”的问题，这种重复包含很容易被发现并修正。

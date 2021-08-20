@@ -13,4 +13,13 @@ io多路复用select,poll,epoll
 	time_t second;
 	susecond_t tv_usec;}
 
-###  epoll
+##  epoll
+高效的红黑树
+用户和内核共享内存
+epoll能直接通知就绪的文件描述符数量;
+
+### 水平触发模式
+
+读:文件描述符还有数据未读就触发,
+
+写:
