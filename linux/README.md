@@ -2,12 +2,12 @@
 
 ## linux命令
 ### 帮助
-	
+
 	1.watis commond 列出命令作用
 	2.whatis -w  "loca*" 正则匹配
 	3.which command 查看路径
 ### 目录及文件命令
-	
+
 	1 find  ./ | wc -l 查看当前目录下文件个数
 	2 cp -r  this that 复制目录
 	3 ls | cat -n 带序号查看
@@ -33,14 +33,14 @@
 	1 df du 查看磁盘空间
 	2 tar 打包文件
 	3 gzip 压缩文件
-	
+
 ### 进程管理
- 
+
  	1 ps 查询进程
  	2 top 实时显示进程消息
  	3 kill 杀死进程
  	4 
- 	
+
 ### 性能监控
 
 	1sar 查看cpu使用率
@@ -52,7 +52,7 @@
 	2.liof 列出系统打开文件
 	3.route 查看路由
 	4.scp下载
-     
+
 ### 用户管理
 
 	1.ueradd添加用户
@@ -84,3 +84,65 @@ netstat -tunlp | grep 端口号
 ### telnet
 
 telnet ip port 查看端口通畅
+
+## linux工具
+
+### sed
+
+流编辑器
+
+```bash
+sed -r '命令' fileName;
+sed -nr #扩展正则
+```
+
+| 功能 |                |
+| ---- | -------------- |
+| s    | 替换substitute |
+| p    | print          |
+| d    | delete         |
+| cal  | c/a/i          |
+
+**一行一行读判断执行**,**默认输出加-n不输出**
+
+#### 查找
+
+```bash
+sed  '1p' #根据行号查找
+sed '1,5p'#范围
+sed '/正则/p' #正则
+sed '//,//p' #正则范围
+```
+
+#### 删除
+
+```bash
+sed '1d'
+sed '1,5d'
+删除文件空行
+sed -r '/^$/d' filename
+!取反:
+sed -r '/^$/!p' filename#不显示
+```
+
+#### 插入
+
+```bash
+c #替代
+sed '3a content' filename #3行下加一行
+i#上插一行
+```
+
+#### 替换
+
+```bash
+sed 's###g' #g 全局替换,默认只替换每行第一个
+```
+
+#### 引用
+
+```bash
+sed -r 's#(.*)#\1#g' #后向引用
+sed 
+```
+
