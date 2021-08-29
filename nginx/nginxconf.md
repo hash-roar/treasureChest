@@ -96,7 +96,7 @@ access_log /data/logs/nginx/b.ttlsa.com-access.log main：访问日志
 	location /404.html{
 	root /uri/errorpages/}
 	就能自动匹配
-	
+
 ### nginx+php环境
 
 nginx与php交互使用fastcgi协议,但是windows下php-cgi.exe有以下缺点
@@ -154,4 +154,161 @@ linux 下用php-fpm这个PHP FastCGI管理器,提供了更好的PHP进程管理�
 	3 重写规则的第三部分
 	第三部分也就是尾部的标记(flag)。 last 标记将导致重写后的 URI 搜索匹配 nginx 的其他 location，最多可循
 	环 10 次
+
+# nginx实践
+
+## 解决跨域
+
+```nginx
+add_header  Acess-Control-Allow-Origin  域名;(*表示所有)
+add_header Acess-Control-Allow-Methods  GET,POST;
+```
+
+## 资源防盗链
+
+```nginx
+对于某些静态资源:
+http{
+    server{
+        location ~ .*\.(png|jpg|gif)${
+            valid_referers none blocked 正则;
+            if($invalid_referer){
+                return 403;
+            }
+            root images/;
+        }
+    }
+}
+```
+
+## 变量与日志
+
+### 内置变量
+
+| args            | 参数          |
+| --------------- | ------------- |
+| host            | server_name   |
+| document_uri    | url           |
+| document_root   | location root |
+| content_length  |               |
+| content_type    |               |
+| http_cookie     |               |
+| remote_addr     |               |
+| remote_port     |               |
+| server_protocol |               |
+| request_method  |               |
+
+### 日志格式
+
+```nginx
+log_format main '$remote_addr  -  $request  - $status - Request'
+```
+
+
+
+## 重写
+
+### 语法
+
+```nginx
+set $variable value #设置变量
+location {
+    set $name tom;
+    set $age 18;
+    default_type text/plain;
+    return 200 $name=$age;
+}
+
+#if语句
+if(condition){
+    
+}#condition  为空或为不成立
+#正则
+if($args ~ (正则) ){
+    
+}# ~区分大小写  ~*不区分大小写
+#字符串中有"}"或";"加引号
+if(!-f $request_filename)
+{
+    #文件不存在进入此块
+}
+
+#break语句
+#终止当前作用域
+#终止当前匹配
+
+#return 
+return status [text];
+return url;#302跳转
+
+
+#rewrite
+location /rewrite{
+    rewrite ^/rewrite/url\w*$ http://www.baidu.com;
+    rewrite ^/rewrite/url(\w*)$ /$1;
+    
+}
+##flag
+#last 重写后重新匹配
+#break 在本块中处理
+#permanent 永久重定向
+
+#rewrite_log
+```
+
+### 实践
+
+```nginx
+#域名跳转
+location /{
+    rewrite  ^(.*) http://www.yuming.com$1;
+    
+}
+
+#域名镜像
+#将某个模块重写到其他域名
+location /a{
+    rewrite ^/user(.*)$ http://yuming$1;
+}
+
+#独立域名
+
+#目录加/
+server_name_in_redirect 
+
+#目录合并
+
+```
+
+## 代理
+
+### 正向代理
+
+```nginx
+resolver ip;#dns
+location /{
+    proxy_pass 域名;
+}
+```
+
+### 反向代理
+
+```nginx
+#proxy_pass
+location / {
+    proxy_pass yuming;
+}
+#yuming 会把地址拼接上
+#yuming/ 直接访问yuming/
+
+#proxy_set_header
+
+#proxy_redirect
+proxy_redirect value rplacement;
+
+#实践
+
+```
+
+## 安全
 
