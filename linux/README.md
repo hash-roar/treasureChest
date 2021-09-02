@@ -146,3 +146,9 @@ sed -r 's#(.*)#\1#g' #后向引用
 sed 
 ```
 
+### grep
+
+### xargs
+
+[xargs]: http://c.biancheng.net/linux/xargs.html
+
