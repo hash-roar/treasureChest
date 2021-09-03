@@ -230,7 +230,37 @@ QString  = q.toString("YYYY-MM-dd");
 
 注册信号处理者
 
+```c++
+connect(ui->closeBtn,&QPushButton::clicked,&MainWindow::close)
+```
+
+#### 自定义信号槽
+
+## 类
+
+### QWidget
+
+```c++
+//构造
+QWidget::QWidget(QWidget *parent = nullptr, Qt::WindowFlags f = ...)
+    
+//设置窗口几何信息
+    void setGeometry()
+    
+    //信号
+    
+```
+
+### QDialog
+
+#### QMessage
+
+QFileDialog
+
+## 实践
+
+### 登录页面
 
 
 
-
+## 
