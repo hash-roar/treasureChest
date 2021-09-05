@@ -146,9 +146,113 @@ sed -r 's#(.*)#\1#g' #后向引用
 sed 
 ```
 
+#### 实践
+
+```bash
+#最后一行加入
+sed '$ a last'
+# 嵌套命令
+## 对3行到第6行，匹配/This/成功后，再匹配/fish/，成功后执行d命令
+ sed '3,6 {/This/{/fish/d}}' pets.txt
+ #拆分文件
+
+```
+
+### awk
+
+#### 实践
+
+```bash
+#拆分文件
+awk 'NR!=1{print > $4}'
+
+#利用数组
+awk 'NR!=1{a[$6]++;} END {for (i in a) print i ", " a[i];}' 4.txt    
+==>
+LISTEN, 2
+off, 1
+ESTABLISHED, 1
+Foreign, 1
+<==
+ps aux|awk 'NR!=1{a[$1]+=$6;} END {for (i in a) print i ",  " a[i] "KB";}'
+==>
+kali,  1011896KB
+message+,  5032KB
+colord,  12892KB
+rtkit,  3112KB
+root,  384052KB
+<==
+
+#与环境变量交互
+
+#for 语句
+echo $PATH | awk -F ":" '{for (i=1;i<=NF;i++) print $i }'   
+==>
+/usr/local/sbin
+/usr/local/bin
+/usr/sbin
+/usr/bin
+/sbin
+/bin
+/usr/local/games
+/usr/games
+<==
+```
+
+
+
 ### grep
 
 ### xargs
 
 [xargs]: http://c.biancheng.net/linux/xargs.html
+
+```bash
+#查看命令并询问是否执行
+echo "one two three" | xargs -p touch 
+#查看命令并直接执行
+echo "one two three" | xargs -t touch 
+
+#分割文件并删除
+find /path -type f -print0(以null分割文件列表) | xargs -0 rm
+
+#行 个
+-L n 将n行作为参数
+-n n 将n个作为参数
+
+#替代字符
+cat foo.txt | xargs -I file sh -c 'echo file; mkdir file'
+one 
+two
+three
+
+#多进程
+xargs -n 1 --max-procs 0(不限制进程) docker kill
+```
+
+
+
+### seq
+
+产生整数
+
+> 例子
+
+```shell
+seq [选项]... 尾数
+seq [选项]... 首数 尾数
+seq [选项]... 首数 增量 尾数
+```
+
+jobs
+
+在命令后加&后台启动
+
+> 后台启动frp并将消息重定向到日志中
+
+```shell
+./frpc -c frpc.ini  &>>frplog & 
+```
+
+### cut
 
