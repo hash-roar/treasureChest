@@ -1,0 +1,103 @@
+#!/bin/bash
+#########----------------------------------->
+# some function for fast query
+function startMusic(){
+num=$(sudo docker ps -a | grep music | grep Up|wc -l)
+music_start=0
+frp_start=0
+if [ $num -lt 1 ]
+then
+	echo "music not started"
+	echo "start the docker now..."
+	sudo docker start music
+else
+	echo "music start already"
+	music_satrt=1
+fi
+num1=$(ps -ef | grep frp|grep -v grep | wc -l )
+if [ $num1 -lt 1 ]
+then
+	echo "frp not started"
+	echo "start frp now..."
+	/home/kali/frp/frpc  -c /home/kali/frp/frpc.ini &>>/home/kali/frp/frplog &
+else
+	echo "frp satrted already"
+	frp_start=1
+fi
+}
+function stopMusic(){
+
+num=$(sudo docker ps -a | grep music | grep Up|wc -l)
+music_start=0
+frp_start=0
+if [ $num -lt 1 ]
+then
+	echo "music not started"
+else
+	echo "music start already"
+	echo "stop the music now..."
+	sudo docker stop music
+fi
+num1=$(ps -ef | grep frp|grep -v grep | wc -l )
+if [ $num1 -lt 1 ]
+then
+	echo "frp not started"
+else
+	echo "frp satrted already"
+	echo "stop the frp now..."
+	ps -ef | grep frp | grep -v grep|awk '{print $2}' | xargs kill -9
+fi
+}
+function startNginx (){
+    nginx_num=$(sudo docker ps -a | grep nginx  | grep Up |wc -l)
+    echo $nginx_num
+    sudo docker start nginx01 
+    nginx_num=$(sudo docker ps -a | grep nginx  | grep Up |wc -l)
+    if [ $nginx_num == 0 ]
+    then
+        echo "error: nginx can't be started"
+    else
+        echo "nginx start,$nginx_num nginx runing now"
+    fi
+}
+function stopNginx(){
+    nginx_num=$(sudo docker ps -a | grep nginx  | grep Up |wc -l)
+    if [ $nginx_num ==  0 ]
+    then
+        echo "no  nginx running"
+        return 
+    fi
+    #stop nginx
+    sudo docker ps -a | grep nginx | awk '{print $1}' | xargs -p  sudo docker stop
+    sudo docker ps -a | grep nginx | awk -n '{print $1}' |grep Up |xargs -p -I {} sudo docker stop {}
+    nginx_num=$(sudo docker ps -a | grep nginx  | grep Up |wc -l)
+    if [ $nginx_num ==  0 ]
+    then
+        echo "stop nginx successfully  no  nginx running"
+        return
+    else
+        echo "error can't stop nginx"
+    fi
+}
+
+function fastquery(){
+for i in  $@
+do
+	case $i in
+	"ip") ifconfig| awk '/inet\s/'  | awk 'NR==2{print $2}'
+	;;
+	"music") startMusic
+	;;
+	"stmusic") stopMusic
+	;;
+    "startNginx") startNginx
+    ;;
+    "stopNginx") stopNginx
+    ;;
+	*) echo "commond not found "
+	;;
+	esac
+done
+}
+
+fastquery  $@
