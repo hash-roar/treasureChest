@@ -1,0 +1,14 @@
+{
+  "name": "for_lf",
+  "version": "1.0.0",
+  "description": "hello npm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lf",
+  "license": "ISC",
+  "dependencies": {
+    "math": "0.0.3"
+  }
+}

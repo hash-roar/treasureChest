@@ -1,2 +1,5 @@
-let md2 = require("./2.js")
-console.log(md2);
+let fs =require("fs");
+
+fs.open("1.txt","r",(error,fd)=>{
+    console.log(fd);
+});

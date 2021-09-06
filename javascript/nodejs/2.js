@@ -1,5 +1,10 @@
+let http = require('http');
 
-let b = "hahha";
-exports.a = "csac";
-exports.b=b;
-console.log("this is 2");
+let server = http.createServer();
+
+server.on("request",function(request,response){
+	console.log("client:-->"+request.url);
+	response.write("hello");
+	response.end();
+})
+server.listen(8880);
