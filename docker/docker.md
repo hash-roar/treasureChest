@@ -354,3 +354,19 @@ ENV PATH $JAVA_HOME:$MYPATH
 EXPOSE 8080
 ```
 
+### 重写端口映射
+
+> 代码
+
+```shell
+sudo systemctl stop docker.service
+
+id=$(sudo docker ps -a | grep name | awk '{print $1}')
+
+vim /var/lib/docker/containers/$id/hostconfig.json
+
+:/Port
+
+:wq
+```
+
