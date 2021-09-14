@@ -10,9 +10,31 @@
 
 [Awwwards - Website Awards - Best Web Design Trends](https://www.awwwards.com/)
 
+[Dribbble - Discover the World’s Top Designers & Creative Professionals](https://dribbble.com/)
+
+
+
 [渐变](https://webgradients.com/)
 
+### 配色
 
+[中 国 色 彩 ](http://zhongguose.com)                                                                          
+
+[ColorHex](https://www.colorhexa.com)                                                                      
+
+[优 色 网 配 色 专 区 ](https://color.uisdc.com)                                                                  
+
+[ ColorDrop](https://www.colordrop.io/)                                                                    
+
+[LOL Colors](https://www.webdesignrankings.com/resources/lolcolors/)                                       
+
+[colorHunt](https://colorhunt.co/)                                                                         
+
+[Adobe Color](https://color.adobe.com/zh/create/color-wheel)                                               
+
+[uigradients](https://uigradients.com/#PiggyPink)                                                          
+
+[webgradient](https://webgradients.com)
 
 ### 图片
 
@@ -30,7 +52,39 @@
 
 [iconfont](https://www.iconfont.cn/)                                                                       
 
-[Awesome Wallpapers - wallhaven.cc](https://wallhaven.cc/)                                                                                                       
+[Awesome Wallpapers - wallhaven.cc](https://wallhaven.cc/)      
+
+#### 壁纸
+
+[WallHaven](https://wallhaven.cc/)                                                                         
+
+[10Wallpaper](https://www.10wallpaper.com/)                                                                
+
+[alphacoders](https://wall.alphacoders.com/?lang=Chinese)                                                  
+
+[极 简 壁 纸 ](https://bz.zzzmh.cn/index)                                                                      
+
+[3G壁 纸 ](https://www.3gbizhi.com/)                                                                         
+
+[必 应 壁 纸 ](https://bing.ioliu.cn/)
+
+   
+
+#### 动态图
+
+[Giphy](https://giphy.com/)                                                                                
+
+[GfyCat](https://gfycat.com/)                                                                              
+
+[Tenor](https://tenor.com/)                                                                                
+
+[GIF ABYSS](https://gifs.alphacoders.com/)                                                                 
+
+[动 图 宇 宙 ](https://biaoqingsoso.com)                                                                       
+
+[Soogif](https://www.soogif.com/)                                                                          
+
+[闪 萌 ](http://www.weshineapp.com)                                                                                               
 
 ###   视 频                                                                                                     
 
@@ -42,7 +96,15 @@
 
 [distill](https://wedistill.io/)                                                                           
 
-​                                                                                                           
+[ 预 告 片 世 界 ](https://www.yugaopian.cn/)                                                                   
+
+[ 33台 词 ](http://33.agilestudio.cn/)                                                                       
+
+[MixKit](https://mixkit.co/free-stock-video)                                                               
+
+[Pexel](https://www.pexels.com/zh-cn/video/)                                                                                                                                     
+
+[VJShi](https://www.vjshi.com)                                                                                                     
 
 ###   音 频                                                                                                     
 
@@ -56,19 +118,53 @@
 
 [淘 声 网 ](https://www.tosound.com/)                                                                         
 
-​                                                                                                           
+### PPT模 板 类                                                                                               
 
-####   字 体                                                                                                     
+[51PPT模 板 ](http://www.51pptmoban.com)                                                                     
+
+[优 品 PPT](https://www.ypppt.com)                                                                           
+
+[第 一 PPT](http://www.1ppt.com)                                                                             
+
+[叮 当 设 计 ](https://www.dingdangsheji.com)                                                                  
+
+[PPT超 级 市 场 ](http://ppt.sotary.com/web/wxapp/index.html)                                                                                                
+
+###   字 体                                                                                                     
 
 [字 由 ](https://www.hellofont.cn/)                                                                          
 
 [100font](https://www.100font.com/) 
+
+[素 材 中 国 ](http://www.sccnn.com/ziku)                                                                                                                                         
+
+[DaFont](https://www.dafont.com)   
+
+[Google字体](https://fonts.google.com/)
+
+### 图标
+
+[阿 里 巴 巴 矢 量 图 库 ](https://www.iconfont.cn/)                                                               
+
+[Ikonate](https://ikonate.com/)                                                                            
+
+[iconstore](https://iconstore.co/)                                                                         
+
+[icoon](https://icooon-mono.com/)                                                                          
+
+[iconfinder](https://www.iconfinder.com/)
 
 ## GET_SOME
 
 ### 搜索
 
 [Jiumo Search 鸠摩搜索 - 文档搜索引擎](https://www.jiumodiary.com/)
+
+[QA类StackOverflow](https://qastack.cn/)
+
+[书籍下载](https://hk1lib.org/)
+
+
 
 #### 导航
 
@@ -112,6 +208,10 @@
 
 [Analysis - Online LaTeX Editor Overleaf](https://www.overleaf.com/project/60b88582720def135abd06d4)
 
+[在线编辑laTex](http://latexlive.com/home##)
+
+[在线剪辑](https://online-video-cutter.com/)
+
 
 
 ### 娱乐
@@ -126,7 +226,7 @@
 
 [水浒传全集在线阅读（120回本）_华语网](https://www.thn21.com/wen/famous/1492.html)
 
-
+[音乐hifi磁场](https://www.hifini.com/)
 
 ## github
 
@@ -172,6 +272,8 @@
 
 [free-programming-books/free-programming-books-zh.md at master · EbookFoundation/free-programming-books](https://github.com/EbookFoundation/free-programming-books/blob/master/books/free-programming-books-zh.md#版本控制)
 
+[30天自制操作系统](https://github.com/yourtion/30dayMakeOS)
+
 ## 计算机教程
 
 ### 命令行
@@ -189,6 +291,14 @@
 ### 手册
 
 [配置 - 在线文档 - 手册网](https://www.shouce.ren/api/view/a/15522)
+
+[vue手册](https://cn.vuejs.org/v2/guide/index.html)
+
+[vuetify手册](https://v2.vuetifyjs.com/zh-Hans/getting-started/quick-start/)
+
+[juery手册](https://jquery.cuishifeng.cn/)
+
+
 
 ### 课程
 

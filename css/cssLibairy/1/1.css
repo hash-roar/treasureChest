@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body
+ {
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
+}
+
+.common{
+    width: 400px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right top, #65dfc975, #6cdaeb27);
+    border-radius: 1rem;
+}
+/* 拟态1-1 */
+
+.nitai1-1 {
+    cursor: pointer;
+  
+}
+
+.nitai1-1 img {
+    width: 100px;
+    height: 100px;
+    border-radius: 1rem;
+    box-shadow: 18px 18px 30px rgba(0, 0, 0, 0.2), -18px -18px 30px rgba(255, 255, 255, 1);
+    transition: all 0.2s ease-out;
+}
+
+.nitai1-1 img:hover {
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.2), 0 0 0 rgba(255, 255, 255, 0.8),
+    inset 18px 18px 30px rgba(0, 0, 0, 0.1),
+    inset  -18px -18px 30px rgba(255, 255, 255, 1)
+    ;
+}
+
+/* 发光按钮-悬停 */
+
+
+.shining_button button{
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 2rem;
+    color: #fff;
+    background: linear-gradient(to right,#03a9f4,#f441a5,#ffeb3b,#09a8f4);
+    border-radius: 50px;
+    background-size: 400%;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.shining_button button::before{
+
+    content: '';
+    position: absolute;
+    top: -5px;
+    bottom: -5px;
+    left: -5px;
+    right: -5px;
+    background: linear-gradient(to right,#03a9f4,#f441a5,#ffeb3b,#09a8f4);
+    border-radius: 50px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+}
+.shining_button button:hover{
+    animation: shining 8s infinite;
+}
+
+@keyframes shining{
+    100%{
+        background-position: -400% 0;
+    }
+}
+
+/* 发光按钮,点击 */
+
+.shining_button2 button{
+    display: inline-block;
+    padding: 12px 36px;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 2px;
+    border-radius: 40px;
+    background: linear-gradient(90deg,#0162c7,#55e7fc);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.shining_button2 span{
+    position: absolute;
+    background: #fff;
+    transform: translate(-50%,-50%);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: shining_button2 1s linear infinite;
+}
+@keyframes shining_button2{
+    0%{
+        width: 0px;
+        height: 0px;
+        opacity: 0.7;
+    }
+    100%{
+        width:400px;
+        height: 400px;
+        opacity: 0;
+    }
+}
