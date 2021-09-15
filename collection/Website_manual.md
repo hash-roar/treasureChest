@@ -12,7 +12,13 @@
 
 [Dribbble - Discover the World’s Top Designers & Creative Professionals](https://dribbble.com/)
 
+[ Navnav   ](http://navnav.co/)                                                                             
 
+[ neumorphism   ](https://neumorphism.io/)                                                                  
+
+[ codrops   ](https://tympanus.net/codrops/)                                                                
+
+[ CSSDeck   ](https://cssdeck.com/) 
 
 [渐变](https://webgradients.com/)
 
