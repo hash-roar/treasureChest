@@ -318,6 +318,10 @@
 
 [一起听音乐](http://music.alang.run//#/)
 
+[改变linux命令行提示符]([Centos 终端命令配色配置 - 简书 (jianshu.com)](https://www.jianshu.com/p/c56961cf0e7e))
+
+
+
 
 
 ## awesome
