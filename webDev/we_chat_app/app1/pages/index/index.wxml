@@ -1,0 +1,25 @@
+<!--pages/index/index.wxml-->
+<view class="banner">
+    <swiper indicator-dots="true" indicator-color="ivory" indicator-active-color="#d43c33">
+    <swiper-item>
+    <image src="/static/far_away.png"></image>
+    </swiper-item>
+    <swiper-item>
+    <image src="/static/far_away.png"></image>
+    </swiper-item>
+    <swiper-item>
+    <image src="/static/far_away.png"></image>
+    </swiper-item>
+    </swiper>
+    <view class="navContainer">
+        <view class="navItem">
+            <text >item1</text>
+        </view>
+        <view class="navItem">
+            <text >item1</text>
+        </view>
+        <view class="navItem">
+            <text >item1</text>
+        </view>
+    </view>
+</view> 
