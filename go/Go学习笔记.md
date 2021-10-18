@@ -310,7 +310,81 @@ func main() {
  ms := &struct1{10, 15.5, "Chris"}
 ```
 
+### 方法
+
+1. 类型和作用在它上面定义的方法必须在同一个包里定义
+2. 当一个匿名类型被内嵌在结构体中时，匿名类型的可见方法也同样被内嵌，这在效果上等同于外层类型 **继承** 了这些方法：**将父类型放在子类型中来实现亚型**。
+
+## 接口和反射
+
+### 接口
+
+1. ```go
+   type Namer interface {
+       Method1(param_list) return_type
+       Method2(param_list) return_type
+       ...
+   }
+   ```
+
+   2. 类型不需要显式声明它实现了某个接口：接口被隐式地实现。多个类型可以实现同一个接口。
+
+      实现某个接口的类型（除了实现接口方法外）可以有其他的方法。
+
+      一个类型可以实现多个接口。
+
+      接口类型可以包含一个实例的引用， 该实例的类型实现了此接口（接口是动态类型）
+
+   3. 接口变量里包含了接收者实例的值和指向对应方法表的指针。
+
+   4. **类型断言:**
+
+   5. **type-switch**:
+
+   ```go
+   switch t := areaIntf.(type) {
+   case *Square:
+       fmt.Printf("Type Square %T with value %v\n", t, t)
+   case *Circle:
+       fmt.Printf("Type Circle %T with value %v\n", t, t)
+   case nil:
+       fmt.Printf("nil value: nothing to check?\n")
+   default:
+       fmt.Printf("Unexpected type %T\n", t)
+   }
+   ```
+
+   6. 你想将切片中的数据复制到一个空接口切片中,可惜不能这么做，编译时会出错.原因是它们俩在内存中的布局是不一样的必须使用 `for-range` 语句来一个一个显式地复制：
+
+   ### 反射
+
+   1. reflect.Type 和 reflect.Value 都有许多方法用于检查和操作它们。一个重要的例子是 Value 有一个 Type 方法返回 reflect.Value 的 Type。另一个是 Type 和 Value 都有 Kind 方法返回一个常量来表示类型：Uint、Float64、Slice 等等。同样 Value 有叫做 Int 和 Float 的方法可以获取存储在内部的值
+
+   2. 函数通过传递一个 x 拷贝创建了 v，那么 v 的改变并不能更改原始的 x。要想 v 的更改能作用到 x，那就必须传递 x 的地址 v = reflect.ValueOf(&x)。
+
+      通过 Type () 我们看到 v 现在的类型是 *float64 并且仍然是不可设置的。
+
+      要想让其可设置我们需要使用 Elem() 函数，这间接的使用指针：v = v.Elem()
+
+   3. 当一个类型包含（内嵌）另一个类型（实现了一个或多个接口）的指针时，这个类型就可以使用（另一个类型）所有的接口方法。
+
+   
+
+   ## io
+
+   ### 读取
+
+   1. 读取标准输入:
+
+   Scanln 扫描来自标准输入的文本，将空格分隔的值依次存放到后续的参数内，直到碰到换行。Scanf 与其类似，除了 Scanf 的第一个参数用作格式字符串，用来决定如何读取。Sscan 和以 Sscan 开头的函数则是从字符串读取，除此之外，与 Scanf 相同
+
+   
+
+   2. 
+
+   
+
+   
 
 
-## 
 
