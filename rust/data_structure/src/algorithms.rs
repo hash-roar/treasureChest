@@ -1,4 +1,3 @@
-use core::num::dec2flt::number;
 use std::cmp::Ord;
 
 pub fn is_sorted<T:PartialOrd>(arr:&[T])->bool{
