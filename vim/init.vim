@@ -1,3 +1,26 @@
+">>>>>>>temp{{{
+function! LoadView() abort
+    try
+        loadview
+    catch /E484/
+        return
+    endtry
+endfunction
+
+set foldmethod=manual
+au BufWinLeave ?*  silent mkview
+au BufWinEnter ?* call LoadView()
+au filetype rust  nnoremap<F5> :AsyncRun cargo run <CR>
+
+nnoremap tn :tabn<cr>
+nnoremap tp :tabp<cr>
+nnoremap tc :tabc<cr>
+
+
+"}}}
+
+
+
 let mapleader = ","
 
 let maplocalleader = "\\"
@@ -18,6 +41,7 @@ set noswapfile
 
 set cursorline 
 set shiftwidth=4
+autocmd filetype cpp :set shiftwidth=2
 set tabstop=4
 set expandtab
 set nobackup
@@ -76,10 +100,21 @@ call plug#begin('~/.vim/pjsonlugged')
     Plug 'tpope/vim-surround'
     Plug 'fatih/vim-go'
     Plug 'neoclide/coc.nvim' , {'branch': 'release'}
+    Plug 'Chiel92/vim-autoformat'
+    Plug 'preservim/nerdcommenter'
 
 call plug#end()
 
 " }}}
+"
+
+"unmap <C-w>
+noremap  <F3> :Autoformat<cr>
+let g:autoformat_verbosemode=1
+"保存时自动格式化PHP代码
+au BufWrite *.cc  :Autoformat
+au BufWrite *.h  :Autoformat
+""
 "
 "translator {{{
 nmap <silent> <Leader>tw <Plug>TranslateW
@@ -90,7 +125,8 @@ let g:translator_proxy_url = 'socks5://127.0.0.1:7891'
 "coc -------->{{{
 "}}}
 set hidden
-let g:coc_global_extensions = ['coc-json','coc-vimlsp']
+nnoremap <leader>qf :cocFix<cr>
+let g:coc_global_extensions = ['']
 
 set updatetime=300
 if has("nvim-0.5.0") || has("patch-8.1.1564")
@@ -166,7 +202,7 @@ nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
+" Find symbol of current documeno;
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
@@ -222,7 +258,7 @@ let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '_darcs', 'build.xml']
 nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr>
 " 设置 F5 运行当前程序
 "nnoremap <silent> <F5> :AsyncRun -raw -cwd=$(VIM_FILEDIR) "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
-nnoremap <silent> <F5> :AsyncRun g++ -std=c++17 -Wall "$(VIM_FILEPATH)" && ./a.out <cr>"
+"nnoremap <silent> <F5> :AsyncRun g++ -std=c++17 -Wall "$(VIM_FILEPATH)" && ./a.out <cr>"
 
 "-----------> cpp highlight
 "
@@ -292,7 +328,8 @@ nnoremap <leader>\ :nohlsearch<CR>
 nnoremap <leader>n :bn<CR>
 nnoremap <leader>p :bp<CR>
 nnoremap <leader>q :q<CR>
-nnoremap <leader>qw :wq<CR>
+nnoremap <leader>qa :wqall<CR>
+nnoremap <leader>wq :wq<CR>
 nnoremap <leader>sa ggVG
 nnoremap <leader>qo :copen<CR>
 nnoremap <leader>qc :cclose<CR>
