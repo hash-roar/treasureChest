@@ -39,6 +39,8 @@ impl <T>Stack<T> {
         self.top
     }
 }
+
+
 #[cfg(test)]
 mod  tests{
     use super::Stack;
