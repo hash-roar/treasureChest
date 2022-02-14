@@ -3,6 +3,9 @@
 #include <cstddef>
 #include <cstdint>
 
+using namespace Log;
+using namespace Log::detail;
+
 namespace Log {
 namespace detail {
   const char digits[] = "9876543210123456789"; //for that The remainder may be a plural
@@ -175,12 +178,76 @@ std::string formatIEC(int64_t s)
   return buf;
 }
 
+} //log
+
+
+
 template<typename T>
 void LogStream::fromInterger(T v){
   if (buffer_.avail()>= kMaxNumericSize ) {
-    size_t len = convert(buffer_.current(),v);
+    size_t len = detail::convert(buffer_.current(),v);
     buffer_.add(len);
   }
 }
 
-} //log
+LogStream& LogStream::operator<<(unsigned short v)
+{
+  *this << static_cast<unsigned int>(v);
+  return *this;
+}
+LogStream& LogStream::operator<<(short v)
+{
+  *this << static_cast<int>(v);
+  return *this;
+}
+
+LogStream& LogStream::operator<<(int v)
+{
+  fromInterger(v);
+  return *this;
+}
+
+LogStream& LogStream::operator<<(unsigned int v)
+{
+  fromInterger(v);
+  return *this;
+}
+
+LogStream& LogStream::operator<<(long v)
+{
+  fromInterger(v);
+  return *this;
+}
+LogStream& LogStream::operator<<(unsigned long v)
+{
+  fromInterger(v);
+  return *this;
+}
+
+LogStream& LogStream::operator<<( long long v)
+{
+  fromInterger(v);
+  return *this;
+}
+LogStream& LogStream::operator<<(unsigned long long v)
+{
+  fromInterger(v);
+  return *this;
+}
+
+
+
+
+LogStream& LogStream::operator<<(const void *p)
+{
+  uintptr_t v= reinterpret_cast<uintptr_t>(p);
+  if (buffer_.avail()>= kMaxNumericSize) {
+    char * buf = buffer_.current();
+    buf[0] ='0';
+    buf[1]= 'x';
+    size_t len= convertHex(buf+2,v);
+    buffer_.add(len+2);
+  }
+}
+
+
