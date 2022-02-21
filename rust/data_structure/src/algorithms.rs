@@ -139,6 +139,10 @@ pub fn counting_sort(arr:&mut[u32],maxval :usize){
 }
 
 
+//heap_sort
+pub fn heap_sort<T:PartialOrd>(arr:&mut[T]) {
+    
+}
 
 #[cfg(test)]
 mod tests {
