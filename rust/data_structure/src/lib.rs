@@ -1,2 +1,3 @@
 pub mod algorithms;
-pub mod stack;
+pub mod string;
+pub mod search;

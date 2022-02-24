@@ -1,4 +1,4 @@
-#ifndef _LOG_FRONT_
-#define _LOG_FRONT_
+#ifndef _LOG_FRONT_H_
+#define _LOG_FRONT_H_
 
 #endif
