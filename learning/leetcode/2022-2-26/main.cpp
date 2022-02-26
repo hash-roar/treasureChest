@@ -1,4 +1,9 @@
+#include <cstddef>
+#include <iterator>
+#include <string_view>
 #include <iostream>
+#include <unordered_map>
+#include <map>
 #include <string>
 #include <utility>
 #include <vector>
@@ -138,20 +143,6 @@ int search_last_less(IntArr const & arr,int target)
 
 }
 
-//vector<string> get_pair(int n)
-//{
-  //auto result = vector<string>();
-  
-  //auto func = [&result,n](int Lremain,int Rremian,string str){
-    //if (str.size()==2*n) {
-      //result.push_back(str);
-      //return ;
-    //}
-    //if(Lremain>0){
-      //func(Lremain,Rremian,str+"(");
-    //}
-  //};
-//}
 
 struct pos{
   int x;
@@ -266,6 +257,105 @@ DouDimensionArr combinationSum(IntArr const &vec,int target)
 }
 
 
+int findRepeatNumber(IntArr & arr)
+{
+  if (arr.empty()) {
+    return -1;
+  }
+  for(int i=0;i<arr.size();i++)
+  {
+    if (int length = arr.size();arr[i]<0 || arr[i]>length-1) {
+      return -1;
+    }
+  }
+
+  for(int i=0;i<arr.size();i++)
+  {
+    while (arr[i]!=i) {
+      if (arr[i]==arr[arr[i]]) {
+        return arr[i];
+      }
+
+      auto temp = arr[i];
+      arr[i] = arr[temp];
+      arr[temp] = temp;
+    }
+  }
+  return -1;
+}
+
+int firstMissingPositive(IntArr& arr) 
+{
+
+  if (arr.empty()) {
+    return -1;
+  }
+  for(int i=0;i<arr.size();i++)
+  {
+    if (int length = arr.size();arr[i]<0 || arr[i]>length-1) {
+      return -1;
+    }
+  }
+
+  for(int i=0;i<arr.size();i++)
+  {
+    while (arr[i]!=i) {
+      if (arr[i]==arr[arr[i]]) {
+        return arr[i];
+      }
+
+      auto temp = arr[i];
+      arr[i] = arr[temp];
+      arr[temp] = temp;
+    }
+  }
+  for(int i=0;i<arr.size();i++)
+  {
+    if (arr[i]!=(i+1)) {
+      return (i+1);
+    }
+  }
+
+  return -1;
+
+}
+
+
+//int  get_longest_substring(string_view str)
+//{
+    //int L=0,R=0,res = 0;
+    //auto indexs =unordered_map<char,int>{};
+    //while (L < str.size()) {
+        //if(auto idx =indexs.find(str[L]);idx!=indexs.end())
+        //{
+
+        //}
+    //}
+
+//}
+//
+
+int get_longest_substring2(string_view str)
+{
+    if (str.size()==0) {
+        return -1;
+    }
+    int freq[127] = {0};
+    int result=0,L=0,R=0;
+    int len = str.size();
+
+    while (L<len) {
+        if (R+1<len&& freq[str[R+1]]==0) { //judge R==len-1
+            freq[str[R+1]]++;
+            R++;
+        }else {
+        freq[str[L]]--;
+        L++;
+        }
+        result = max(result,R-L+1);
+    }
+    return result;
+}
 
 
 
