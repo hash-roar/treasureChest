@@ -26,6 +26,16 @@ struct ListNode{
   ListNode(int x,ListNode*next):val(x),next(next){}
 };
 
+template<typename T>
+struct ListNodeT
+{
+  T val;
+  next ListNodeT;
+  ListNodeT()=default;
+  ListNodeT(T val):val(val),next(nullptr){}
+  ListNodeT(T val,ListNodeT* next):val(val),next(next){}
+}
+
 //------> utils <--------
 template <typename T>
 void swap_data(T& a, T& b)

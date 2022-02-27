@@ -167,4 +167,49 @@ ListNode* delete_duplicates(ListNode* head)
     return dummy->next;
 }
 
+bool list_has_cycle(ListNode* head)
+{
+    auto slow = head,fast=head;
+    while (fast!=nullptr && fast->next!=nullptr) {
+        fast = fast->next->next;
+        slow= slow->next;
+        if (slow ==fast) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+ListNode* add_two_list(ListNode* l1,ListNode* l2)
+{
+    auto head = new ListNode(0);
+    int n1=0,n2=0,carray=0;
+    auto current = head;
+
+    while (l1!=nullptr || l2!=nullptr || carray!=0) {
+        if (l1 ==nullptr) {
+            n1=0;
+        }else {
+        n1=l1->val;
+        l1 = l1->next;
+        }
+        if(l2==nullptr)
+        {
+            n2=0;
+        }else {
+        n2 = l2->val;
+        l2 =l2->next;
+        }
+
+        current->next = new ListNode((n1+n2+carray)%10);
+        current = current->next;
+        carray = (n1+n2+carray)/10;
+    }
+    return head->next;
+}
+
+
+
+
 
