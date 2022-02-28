@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -26,15 +27,23 @@ struct ListNode{
   ListNode(int x,ListNode*next):val(x),next(next){}
 };
 
+struct TreeNode{
+  int val;
+  TreeNode*left;
+  TreeNode*right;
+  TreeNode(int val=0,TreeNode*left=nullptr,TreeNode*right=nullptr)
+    :val(val),left(left),right(right){}
+};
+
 template<typename T>
 struct ListNodeT
 {
   T val;
-  next ListNodeT;
+   ListNodeT* next;
   ListNodeT()=default;
   ListNodeT(T val):val(val),next(nullptr){}
   ListNodeT(T val,ListNodeT* next):val(val),next(next){}
-}
+};
 
 //------> utils <--------
 template <typename T>
