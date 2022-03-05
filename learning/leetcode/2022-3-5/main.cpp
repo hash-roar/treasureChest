@@ -1,7 +1,9 @@
 #include "../include.h"
 #include <algorithm>
 #include <map>
+#include <stdint.h>
 #include <string>
+#include <tuple>
 #include <unordered_map>
 #include <vector>
 #include <queue>
@@ -121,4 +123,88 @@ IntArr get_kthtimes_num(IntArr const& arr,int k)
   return result;
 }
 
+//int binary_saerch_with_rotate(IntArr const& arr,int target)
+//{
+  //if(arr.empty())
+  //{
+    //return -1;
+  //}
+  //int left=0,right=arr.size();
+  //while(left<right){
+    //int mid=(left+right)/2;
+    //int lvalue=arr[left],rvalue=arr[right],mvalue=arr[mid];
 
+    
+  //}
+//}
+//
+
+int num_tree(int n)
+{
+  auto dp = IntArr{};
+  dp.resize(n+1);
+  dp[0]=1;
+  dp[1]=1;
+  return -1;
+}
+
+void inorder(TreeNode* root,IntArr & arr)
+{
+  if(root==nullptr)
+  {
+    return;
+  }
+  inorder(root->left,arr);
+  arr.push_back(root->val);
+  inorder(root->right,arr);
+}
+
+bool is_bst(TreeNode* root)
+{
+  auto arr = IntArr{};
+  inorder(root,arr);
+  for(int i=1;i<arr.size();i++)
+  {
+    if(arr[i-1]<arr[i])
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool is_valid_bst_help(TreeNode*root,int min,int max)
+{
+  if(root == nullptr)
+  {
+    return true;
+  }
+  int val = root->val;
+  return val>min && val<max && is_valid_bst_help(root->left,min,val) &&is_valid_bst_help(root->right,val,max);
+}
+
+
+bool is_valid_bst(TreeNode* root)
+{
+  return  is_valid_bst_help(root,INT32_MIN,INT32_MAX);
+}
+
+//tuple<TreeNode*,TreeNode*,TreeNode*> 
+//
+ //tuple<TreeNode*,TreeNode*,TreeNode*> inorder_traverse(TreeNode* root,TreeNode*pre,TreeNode*first,TreeNode*second)
+//{
+  //if (root==nullptr) {
+    //return make_tuple(pre,first,second);
+  //}
+   //[pre,first,second] = inorder_traverse(root->left,pre,first,second);
+
+//}
+//
+//void inorder_traverse(TreeNode* root,TreeNode* pre,
+                      //TreeNode** first_ptr,TreeNode** second_ptr)
+//{
+  //if (root==nullptr) {
+    //return;
+  //}
+  //inorder_traverse(root,pre,first_ptr,second_ptr);
+//}
