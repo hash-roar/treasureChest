@@ -59,3 +59,5 @@ bool can_construct(string const&ransom_node,string const& magazine)
 }
 
 
+
+
