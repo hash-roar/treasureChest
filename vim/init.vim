@@ -78,6 +78,7 @@ syntax on
 set number
 set noswapfile
 
+set autochdir
 set cursorline
 set shiftwidth=4
 autocmd filetype cpp :set shiftwidth=2
@@ -129,44 +130,52 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 
 call plug#begin('~/.vim/pjsonlugged')
 
-"=========> vim theme <======
-Plug 'trevordmiller/nova-vim'
-Plug 'preservim/vim-colors-pencil'
-Plug 'soft-aesthetic/soft-era-vim'
-Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+    "=========> vim theme <======
+    Plug 'trevordmiller/nova-vim'
+    Plug 'preservim/vim-colors-pencil'
+    Plug 'soft-aesthetic/soft-era-vim'
+    Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+    Plug 'morhetz/gruvbox'
+    Plug 'flazz/vim-colorschemes'
+
+    "=========> vim theme <======
 
 
 
-"=========> vim theme <======
+
+
+    Plug 'dense-analysis/ale'
+    Plug 'voldikss/vim-translator'
+    Plug 'preservim/nerdtree'
+    "Plug 'dracula/vim', { 'as': 'dracula' }
+    "plug 'xavierd/clang_complete'
+    "Plug 'kyoz/purify'
+    "Plug 'sonph/onehalf', { 'rtp': 'vim' }
+    Plug 'arcticicestudio/nord-vim'
+    Plug 'ludovicchabant/vim-gutentags'
+    Plug 'skywind3000/asyncrun.vim'
+    Plug 'octol/vim-cpp-enhanced-highlight'
+    Plug 'yggdroot/leaderf', { 'do': ':leaderfinstallcextension' }
+    Plug 'jiangmiao/auto-pairs'
+    "plug 'valloric/youcompleteme'
+    Plug 'tpope/vim-surround'
+    Plug 'fatih/vim-go'
+    Plug 'neoclide/coc.nvim' , {'branch': 'release'}
+    Plug 'Chiel92/vim-autoformat'
+    Plug 'preservim/nerdcommenter'
+    Plug 'itchyny/lightline.vim'
+    "plug 'junegunn/fzf', { 'do': { -> fzf#install() } }>
+    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf.vim'
+    Plug 'mhinz/vim-startify'
+    Plug 'voldikss/vim-floaterm'
+    Plug 'voldikss/LeaderF-floaterm'
+    Plug 'majutsushi/tagbar'
 
 
 
 
 
-Plug 'dense-analysis/ale'
-Plug 'voldikss/vim-translator'
-Plug 'preservim/nerdtree'
-"Plug 'dracula/vim', { 'as': 'dracula' }
-"plug 'xavierd/clang_complete'
-"Plug 'kyoz/purify'
-"Plug 'sonph/onehalf', { 'rtp': 'vim' }
-Plug 'arcticicestudio/nord-vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'yggdroot/leaderf', { 'do': ':leaderfinstallcextension' }
-Plug 'jiangmiao/auto-pairs'
-"plug 'valloric/youcompleteme'
-Plug 'tpope/vim-surround'
-Plug 'fatih/vim-go'
-Plug 'neoclide/coc.nvim' , {'branch': 'release'}
-Plug 'Chiel92/vim-autoformat'
-Plug 'preservim/nerdcommenter'
-Plug 'itchyny/lightline.vim'
-"plug 'junegunn/fzf', { 'do': { -> fzf#install() } }>
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'mhinz/vim-startify'
 call plug#end()
 
 " }}}
@@ -404,6 +413,10 @@ nnoremap sp <Plug>(ale_previous_wrap)
 nnoremap sp <Plug>(ale_next_wrap)
 "=============>ale<====================
 
+"=============>floaterm<====================
+let g:floaterm_width=0.9
+"
+"=============>floaterm<====================
 "}}}
 
 
@@ -455,8 +468,20 @@ nnoremap <space>fl   :Leaderf line<cr>
 nnoremap <space>fL   :Leaderf line<cr>
 nnoremap <space>fs   :Leaderf self<cr>
 nnoremap <space>fc   :Leaderf command<cr>
+nnoremap <space>fw   :Leaderf floaterm<cr>
+
+tnoremap <silent> <space>wt  <C-\><C-n>:FloatermToggle<CR>
+nnoremap <silent> <space>wt  :FloatermToggle<CR>
+"tnoremap <silent> <space>ww  <aleC-\><C-n>:FloatermToggle<CR>
+tnoremap <silent> <space>wn  <C-\><C-n>:FloatermNext<CR>
+tnoremap <silent> <space>wp  <C-\><C-n>:FloatermPrev<CR>
+tnoremap <silent> <space>wk  <C-\><C-n>:FloatermKill<CR>
+nnoremap <silent> <space>wc  :FloatermNew<CR>
+nnoremap <space>j :tabn<CR>
+nnoremap <space>k :tabp<CR>
 
 nnoremap <C-x>  <C-v>
+nnoremap <leader>mc :CocCommand document.renameCurrentWord<CR>     
 nnoremap <leader>ev :split $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>; :execute "normal! mqA;\e`q"<cr>
@@ -486,7 +511,7 @@ nnoremap L $
 " plug map
 "--> nerd tree <--
 "nnoremap <leader>n :NERDTreeFocus<CR>
-"nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-n> :NERDTree<CR>
 nnoremap <leader><leader> :NERDTreeToggle<CR>
 "nnoremap <C-f> :NERDTreeFind<CR>
 
