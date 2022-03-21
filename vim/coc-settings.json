@@ -1,5 +1,18 @@
 {
-    "coc.preferences.extensionUpdateCheck": "daily",
+    "clangd.fallbackFlags": [
+        "-std=c++17"
+    ],
+    "clangd.enabled": true,
+    "rust-analyzer.hover.linksInHover": true,
+    "rust-analyzer.inlayHints.enable": true,
+    "rust-analyzer.inlayHints.refreshOnInsertMode": true,
+    "rust-analyzer.hover.documentation": true,
+    "rust-analyzer.updates.channel": "stable",
+    "hover.floatConfig": {
+        "maxWidth": 35,
+        "maxHeight": 80
+    },
+    "coc.preferences.extensionUpdateCheck": "weekly",
     "suggest.noselect": true,
     "suggest.enablePreselect": false,
     "suggest.completionItemKindLabels": {
