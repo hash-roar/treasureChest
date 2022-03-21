@@ -18,6 +18,9 @@ let $GTAGSLABEL = 'native-pygments'
 let $GTAGSCONF = '/usr/local/share/gtags/gtags.conf'
 
 
+"set shortmess=a
+set cmdheight=1
+
 abbreviate W w
 abbreviate Q q
 
@@ -417,6 +420,13 @@ nnoremap sp <Plug>(ale_next_wrap)
 let g:floaterm_width=0.9
 "
 "=============>floaterm<====================
+"=============>tagbar<====================
+"
+let g:tagbar_autofocus=1
+let g:tagbar_sort=0
+let g:tagbar_silent=1
+"
+"=============>tagbar<====================
 "}}}
 
 
@@ -477,8 +487,11 @@ tnoremap <silent> <space>wn  <C-\><C-n>:FloatermNext<CR>
 tnoremap <silent> <space>wp  <C-\><C-n>:FloatermPrev<CR>
 tnoremap <silent> <space>wk  <C-\><C-n>:FloatermKill<CR>
 nnoremap <silent> <space>wc  :FloatermNew<CR>
-nnoremap <space>j :tabn<CR>
-nnoremap <space>k :tabp<CR>
+nnoremap <space>k :tabn<CR>
+nnoremap <space>j :tabp<CR>
+
+
+nnoremap \\  :TagbarToggle<CR>
 
 nnoremap <C-x>  <C-v>
 nnoremap <leader>mc :CocCommand document.renameCurrentWord<CR>     
