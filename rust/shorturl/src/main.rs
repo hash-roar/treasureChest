@@ -1,29 +1,28 @@
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+mod config;
+mod db;
+mod error;
+mod handlers;
+mod models;
 
-#[get("/")]
-async fn hello() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
-}
+use std::io;
 
-#[post("/echo")]
-async fn echo(req_body: String) -> impl Responder {
-    HttpResponse::Ok().body(req_body)
-}
+use crate::handlers::*;
+use actix_web::{web, App, HttpServer};
+use dotenv::dotenv;
+use tokio_postgres::NoTls;
 
-async fn manual_hello() -> impl Responder {
-    HttpResponse::Ok().body("Hey there!")
-}
+#[actix_rt::main]
+async fn main() -> io::Result<()> {
+    dotenv().ok();
+    let config = crate::config::Config::from_env().unwrap();
+    let pool = config.db.create_pool(NoTls).unwrap();
 
-
-#[actix_web::main]
-async fn main() -> std::io::Result<()>{
-    HttpServer::new(||{
+    HttpServer::new(move || {
         App::new()
-            .service(hello)
-            .service(echo)
-            .route("/hey",web::get().to(manual_hello))
+            .data(pool.clone())
+            .route("/", web::get().to(status))
     })
-        .bind("127.0.0.1:8080")?
-        .run()
-        .await
+    .bind(format!("{}:{}", config.server.host, config.server.port))?
+    .run()
+    .await
 }
