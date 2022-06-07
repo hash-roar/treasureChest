@@ -1,5 +1,5 @@
 
-use actix_web::{ResponseError.HttpResponse}; 
+use actix_web::{ResponseError,HttpResponse}; 
 use derive_more::Display;
 
 #[derive(Debug,Display)]
@@ -8,9 +8,6 @@ pub enum  ServiceError {
     NotFound,
     #[display(fmt="server error")]
     InternalServerError,
-    #[display(fmt="your ip has been banned")]
-
-    IpBanned
 }
 
 impl ResponseError for ServiceError {

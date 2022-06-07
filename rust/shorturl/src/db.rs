@@ -1,22 +1,9 @@
-use std::io;
+use color_eyre::Result;
 
-use crate::models::*;
-use deadpool_postgres::Client;
-use tokio_pg_mapper::FromTokioPostgresRow;
+use sqlx::{query, PgPool, query_as};
 
-pub async fn get_url(client: &Client, short_code: String) -> Result<Url, io::Error> {
-    let statement = client
-        .prepare("select * from urls WHERE short_code = $1")
-        .await
-        .unwrap();
-
-    client
-        .query(&statement, &[&short_code])
-        .await
-        .expect("query databse error")
-        .iter()
-        .map(|row| Url::from_row_ref(row).unwrap())
-        .collect::<Vec<Url>>()
-        .pop()
-        .ok_or(io::Error::new(io::ErrorKind::Other, "error get url"))
+pub async fn get_url(pool: &PgPool, short_code: String) -> Result<String> {
+    let query_str = "select full_url from urls WHERE short_code = $1";
+    let result: (String,) = query_as(query_str).bind(short_code).fetch_one(pool).await?;
+    Ok(result.0)
 }

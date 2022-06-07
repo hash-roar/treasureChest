@@ -1,8 +1,6 @@
-use serde::{Serialize,Deserialize};
-use tokio_pg_mapper_derive::PostgresMapper;
+use serde::{Deserialize, Serialize};
 
-#[derive(Serialize,Deserialize,PostgresMapper)]
-#[pg_mapper(table="urls")]
+#[derive(Serialize, Deserialize)]
 pub struct Url {
     pub id: i32,
     pub base_url: String,
@@ -12,3 +10,4 @@ pub struct Url {
     pub expiration_date: String,
     pub click_times: i64,
 }
+
