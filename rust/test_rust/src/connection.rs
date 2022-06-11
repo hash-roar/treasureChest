@@ -37,7 +37,10 @@ impl fmt::Display for ProxyState {
 
 #[derive(Debug)]
 pub struct  ProxyConnection{
-    pub state:Mutex<ProxyState>,
+    // it is ok to use std::sync::mutex if process does not cross await
+    // we do not solve mutex poison for that if a thread panic,it means unexpected fatal error happen
+    //it will crash the program 
+    pub state:Mutex<ProxyState>, // this can be replaced by atomic number for efficiency
 }
 
 impl ProxyConnection {
@@ -50,7 +53,7 @@ impl ProxyConnection {
     #[instrument]
      pub async fn process(& self,mut tcp:TcpStream,addr: SocketAddr,des :String) -> Result<()>{
         {
-            *self.state.lock().unwrap() = ProxyState::ToConnSetting;
+            *self.state.lock().unwrap() = ProxyState::ToConnSetting; //RAII
         }
 
         let mut des_stream = TcpStream::connect(&des).await?;
@@ -58,6 +61,7 @@ impl ProxyConnection {
         {
             *self.state.lock().unwrap() = ProxyState::Established;
         }
+        // the core code of this program, error result will be passed up to be recorded by ProxyServer
         let (src_to_des, des_to_src)=  copy_bidirectional(&mut tcp, & mut des_stream).await?;
 
         info!("connection: {} ===> {}  close,copy bytes: src --> des:{},  des --> src:{}",
